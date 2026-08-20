@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>羅針と潮騒 ― 大航海時代 航海日誌</title>
+<meta name="description" content="大航海時代にまつわる資料や物語を、航海日誌のように綴っていく個人サイト「羅針と潮騒」。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&family=Zen+Old+Mincho:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2b2f;
+    --deep-sea:#0d3b4c;
+    --deep-sea-2:#0a2d3b;
+    --sea:#5fa3bd;
+    --sea-light:#a9d3de;
+    --sea-pale:#dcedf1;
+    --parchment:#f3e7c9;
+    --parchment-2:#ead6a6;
+    --parchment-line:#cdb37e;
+    --accent:#a7c23e;
+    --accent-deep:#7f9a2c;
+    --accent-pale:#e4edc6;
+    --shadow:0 18px 40px -20px rgba(13,59,76,.45);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Zen Old Mincho','Shippori Mincho',serif;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.jp-serif{font-family:'Shippori Mincho',serif;}
+  .lat{font-family:'EB Garamond',serif;font-style:italic;letter-spacing:.08em;}
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  ::selection{background:var(--accent);color:var(--deep-sea-2);}
+
+  /* ---------- header / nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(13,59,76,.92);
+    backdrop-filter:blur(6px);
+    color:var(--parchment);
+    border-bottom:1px solid rgba(167,194,62,.35);
+  }
+  .nav-wrap{
+    max-width:1080px;margin:0 auto;padding:14px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{
+    display:flex;align-items:baseline;gap:10px;
+    font-size:1.05rem;letter-spacing:.06em;
+    text-decoration:none;color:var(--parchment);
+  }
+  .brand .lat{color:var(--accent);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;}
+  nav.route{
+    display:flex;align-items:center;gap:0;
+    list-style:none;margin:0;padding:0;
+    position:relative;
+  }
+  nav.route ul{display:flex;align-items:center;gap:0;list-style:none;margin:0;padding:0;}
+  nav.route .line{
+    position:absolute;left:14px;right:14px;top:50%;
+    height:1px;background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 12px);
+    opacity:.75;z-index:0;
+  }
+  nav.route li{position:relative;z-index:1;}
+  nav.route a{
+    display:flex;flex-direction:column;align-items:center;gap:5px;
+    padding:6px 18px;text-decoration:none;font-size:.82rem;letter-spacing:.05em;color:var(--sea-pale);
+    transition:color .2s ease;
+  }
+  nav.route a .port-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--sea-pale);border:1px solid var(--deep-sea);
+    transition:.2s ease;
+  }
+  nav.route a:hover{color:var(--accent);}
+  nav.route a:hover .port-dot{background:var(--accent);transform:scale(1.3);}
+  nav.route a.current .port-dot{background:var(--accent);box-shadow:0 0 0 3px rgba(167,194,62,.25);}
+  nav.route a.current{color:var(--accent);}
+  .menu-btn{display:none;background:none;border:1px solid var(--sea-pale);color:var(--sea-pale);
+    padding:6px 12px;font-family:inherit;border-radius:2px;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(ellipse 120% 80% at 50% -10%, rgba(167,194,62,.18), transparent 55%),
+      linear-gradient(180deg,var(--deep-sea-2) 0%, var(--deep-sea) 45%, var(--sea) 100%);
+    color:var(--parchment);
+    padding:88px 0 0;
+  }
+  .hero-inner{
+    max-width:1080px;margin:0 auto;padding:0 28px;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;
+    min-height:460px;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'EB Garamond',serif;font-style:italic;font-size:.85rem;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);}
+  .hero h1{
+    font-size:clamp(2.4rem,5vw,3.6rem);
+    font-weight:800;margin:0 0 20px;letter-spacing:.03em;line-height:1.35;
+    text-shadow:0 2px 24px rgba(0,0,0,.25);
+  }
+  .hero h1 span{display:block;font-size:.42em;font-weight:500;color:var(--sea-pale);
+    letter-spacing:.08em;margin-top:10px;}
+  .hero p.lead{max-width:46ch;color:var(--sea-pale);font-size:1.02rem;margin:0 0 30px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 26px;border-radius:2px;text-decoration:none;
+    font-size:.92rem;letter-spacing:.04em;border:1px solid transparent;transition:.25s ease;
+  }
+  .btn-solid{background:var(--accent);color:var(--deep-sea-2);font-weight:600;}
+  .btn-solid:hover{background:var(--accent-deep);color:var(--parchment);}
+  .btn-outline{border-color:rgba(243,231,201,.5);color:var(--parchment);}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* compass */
+  .compass-holder{display:flex;justify-content:center;align-items:center;position:relative;}
+  .compass-holder svg{width:min(100%,320px);}
+  #rotating-ring{
+    transform-box:fill-box;transform-origin:center;
+    animation:spin 160s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ship + horizon */
+  .horizon{
+    position:relative;height:150px;margin-top:36px;
+    border-top:1px solid rgba(243,231,201,.25);
+    overflow:hidden;
+  }
+  .ship-track{position:absolute;top:38px;left:0;width:100%;height:70px;}
+  .ship{
+    position:absolute;top:0;left:-12%;width:130px;
+    animation:sail 46s linear infinite;
+  }
+  @keyframes sail{
+    0%{left:-14%;}
+    100%{left:104%;}
+  }
+  .wave-row{position:absolute;bottom:0;left:0;width:100%;}
+  .wave-row svg{width:100%;height:auto;display:block;}
+
+  @media (prefers-reduced-motion:reduce){
+    #rotating-ring,.ship,html{animation:none !important;scroll-behavior:auto;}
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:76px 0;}
+  .section-head{max-width:640px;margin:0 0 42px;}
+  .section-head .lat{display:block;font-size:.8rem;color:var(--accent-deep);margin-bottom:8px;}
+  .section-head h2{font-size:1.85rem;margin:0 0 14px;letter-spacing:.04em;}
+  .section-head p{margin:0;color:#4a4038;max-width:56ch;}
+
+  .about-log{
+    display:grid;grid-template-columns:1fr;gap:0;
+    background:var(--parchment);
+  }
+  .about-log p{margin:0 0 16px;color:#3d342b;}
+  .about-log p:last-child{margin-bottom:0;}
+
+  /* port cards */
+  .ports{position:relative;padding-top:10px;}
+  .route-track{
+    position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  }
+  .route-track::before{
+    content:"";position:absolute;top:29px;left:8%;right:8%;height:1px;
+    background:repeating-linear-gradient(90deg,var(--parchment-line) 0 8px,transparent 8px 16px);
+    z-index:0;
+  }
+  .port-card{
+    position:relative;z-index:1;
+    background:#fbf4e0;border:1px solid var(--parchment-line);
+    padding:34px 26px 30px;border-radius:2px;
+    box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:14px;
+    text-decoration:none;color:var(--ink);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .port-card:hover{transform:translateY(-6px);box-shadow:0 22px 46px -18px rgba(13,59,76,.5);}
+  .port-mark{
+    width:16px;height:16px;border-radius:50%;
+    background:var(--parchment);border:2px solid var(--accent-deep);
+    position:absolute;top:-8px;left:26px;
+  }
+  .port-num{font-family:'EB Garamond',serif;font-style:italic;color:var(--accent-deep);font-size:.85rem;letter-spacing:.1em;}
+  .port-card h3{margin:0;font-size:1.28rem;letter-spacing:.03em;}
+  .port-card p{margin:0;font-size:.92rem;color:#5a5045;flex:1;}
+  .port-card .go{font-size:.8rem;letter-spacing:.08em;color:var(--accent-deep);}
+
+  /* coordinate strip */
+  .coord-strip{
+    background:var(--deep-sea);color:var(--sea-pale);
+    padding:46px 0;
+  }
+  .coord-inner{
+    display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:center;
+  }
+  .coord-item{font-family:'EB Garamond',serif;}
+  .coord-item .label{display:block;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+  .coord-item .val{font-size:1.15rem;font-style:italic;}
+
+  /* footer */
+  footer{background:var(--deep-sea-2);color:var(--sea-pale);padding:70px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;margin-bottom:50px;}
+  .bottle h2{font-size:1.4rem;color:var(--parchment);margin:0 0 10px;}
+  .bottle p{color:var(--sea-light);font-size:.9rem;margin:0 0 24px;max-width:44ch;}
+  form.contact{display:flex;flex-direction:column;gap:14px;max-width:440px;}
+  form.contact input,form.contact textarea{
+    background:rgba(243,231,201,.06);
+    border:1px solid rgba(167,194,62,.35);
+    color:var(--parchment);
+    padding:11px 14px;font-family:inherit;font-size:.9rem;border-radius:2px;
+  }
+  form.contact input::placeholder,form.contact textarea::placeholder{color:rgba(220,237,241,.5);}
+  form.contact textarea{resize:vertical;min-height:110px;}
+  form.contact button{
+    align-self:flex-start;background:var(--accent);color:var(--deep-sea-2);
+    border:none;padding:11px 26px;font-family:inherit;font-size:.9rem;letter-spacing:.04em;
+    border-radius:2px;cursor:pointer;font-weight:600;transition:.2s ease;
+  }
+  form.contact button:hover{background:var(--accent-deep);color:var(--parchment);}
+
+  .foot-links h3{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:0 0 16px;}
+  .foot-links ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .foot-links a{text-decoration:none;color:var(--sea-pale);font-size:.92rem;border-bottom:1px solid transparent;}
+  .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
+  .hub-card{
+    margin-top:26px;padding:16px 18px;border:1px solid rgba(167,194,62,.3);border-radius:2px;
+    font-size:.85rem;
+  }
+  .hub-card a{color:var(--accent);text-decoration:none;}
+  .hub-card a:hover{text-decoration:underline;}
+
+  .foot-bottom{
+    border-top:1px solid rgba(243,231,201,.12);
+    padding-top:24px;
+    display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
+    font-size:.76rem;color:rgba(220,237,241,.55);
+  }
+  .foot-bottom .ai-notice{max-width:60ch;}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media (max-width:860px){
+    .hero-inner{grid-template-columns:1fr;text-align:left;}
+    .compass-holder{order:-1;margin-top:10px;}
+    .route-track{grid-template-columns:1fr;}
+    .route-track::before{display:none;}
+    .foot-grid{grid-template-columns:1fr;gap:40px;}
+    nav.route{display:none;}
+    nav.route.open{display:flex;position:absolute;top:100%;left:0;right:0;
+      background:var(--deep-sea-2);flex-direction:column;padding:10px 28px 20px;}
+    nav.route.open ul{flex-direction:column;align-items:flex-start;gap:6px;}
+    nav.route .line{display:none;}
+    .menu-btn{display:inline-block;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="brand">羅針と潮騒<span class="lat">Age of Discovery Log</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="メニューを開く">☰ menu</button>
+    <nav class="route" id="mainNav">
+      <div class="line"></div>
+      <ul>
+        <li><a href="index.html" class="current"><span class="port-dot"></span>現在地</a></li>
+        <li><a href="blog.html"><span class="port-dot"></span>航海日誌</a></li>
+        <li><a href="gallery.html"><span class="port-dot"></span>絵図帖</a></li>
+        <li><a href="about.html"><span class="port-dot"></span>船長より</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow">Age of Discovery Notebook</span>
+      <h1>羅針と潮騒<span>地図の余白へ、少しずつ船を出す。</span></h1>
+      <p class="lead">羅針盤ひとつを頼りに未知の海図へ漕ぎ出した大航海時代――その航路や船、地図、交易にまつわる資料や物語を、航海日誌のように書き留めていく個人サイトです。</p>
+      <div class="hero-ctas">
+        <a href="blog.html" class="btn btn-solid">航海日誌を読む</a>
+        <a href="about.html" class="btn btn-outline">船長について</a>
+      </div>
+    </div>
+
+    <div class="compass-holder">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <g id="rotating-ring">
+          <circle cx="150" cy="150" r="138" fill="none" stroke="#a7c23e" stroke-width="1" opacity=".55"/>
+          <circle cx="150" cy="150" r="118" fill="none" stroke="#f3e7c9" stroke-width="1" opacity=".35"/>
+          <g transform="translate(150,150)">
+            <polygon points="0,-128 9,-22 0,-10 -9,-22" fill="#a7c23e"/>
+            <polygon points="0,128 9,22 0,10 -9,22" fill="#a7c23e"/>
+            <polygon points="128,0 22,9 10,0 22,-9" fill="#a7c23e"/>
+            <polygon points="-128,0 -22,9 -10,0 -22,-9" fill="#a7c23e"/>
+            <polygon points="0,-88 6,-22 0,-10 -6,-22" fill="#f3e7c9" transform="rotate(45)"/>
+            <polygon points="0,-88 6,-22 0,-10 -6,-22" fill="#f3e7c9" transform="rotate(135)"/>
+            <polygon points="0,-88 6,-22 0,-10 -6,-22" fill="#f3e7c9" transform="rotate(225)"/>
+            <polygon points="0,-88 6,-22 0,-10 -6,-22" fill="#f3e7c9" transform="rotate(315)"/>
+          </g>
+        </g>
+        <g transform="translate(150,150)">
+          <circle r="20" fill="#0d3b4c" stroke="#a7c23e" stroke-width="1.5"/>
+          <circle r="4" fill="#a7c23e"/>
+        </g>
+        <text x="150" y="34" text-anchor="middle" font-family="EB Garamond, serif" font-style="italic" font-size="20" fill="#f3e7c9">N</text>
+        <text x="150" y="276" text-anchor="middle" font-family="EB Garamond, serif" font-style="italic" font-size="20" fill="#f3e7c9">S</text>
+        <text x="272" y="157" text-anchor="middle" font-family="EB Garamond, serif" font-style="italic" font-size="20" fill="#f3e7c9">E</text>
+        <text x="28" y="157" text-anchor="middle" font-family="EB Garamond, serif" font-style="italic" font-size="20" fill="#f3e7c9">W</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="horizon">
+    <div class="ship-track">
+      <svg class="ship" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8,102 Q100,132 192,102 L176,113 Q100,124 24,113 Z" fill="#f3e7c9"/>
+        <line x1="100" y1="100" x2="100" y2="18" stroke="#f3e7c9" stroke-width="3"/>
+        <path d="M102,24 Q142,52 102,96 Z" fill="#f3e7c9" opacity=".92"/>
+        <path d="M98,40 Q64,56 98,82 Z" fill="#a7c23e" opacity=".9"/>
+        <path d="M100,18 L118,26 L100,30 Z" fill="#a7c23e"/>
+      </svg>
+    </div>
+    <div class="wave-row">
+      <svg viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,40 C150,10 300,70 450,42 C600,14 750,72 900,44 C1020,22 1120,50 1200,36 L1200,90 L0,90 Z" fill="#f3e7c9"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="section-head reveal">
+    <span class="lat">Ship's Log — Preface</span>
+    <h2>この航海について</h2>
+    <p>15〜17世紀、羅針盤と星の位置だけを頼りに白紙の海図へ漕ぎ出した人々がいた時代――大航海時代を、趣味として少しずつ読み解いていくための場所です。</p>
+  </div>
+  <div class="about-log reveal">
+    <p>航路図、造船技術、香辛料や砂糖といった交易品、そして名も残らなかった乗組員たちの暮らしまで。教科書の年表の裏側にある「なぜその航路を選んだのか」「船の上で何を食べていたのか」といった小さな疑問を出発点に、調べたことをここに書き留めています。</p>
+    <p>専門家ではなく、あくまで一人の航海者としての手記です。誤りに気づいたときは航海日誌の中で訂正しながら、少しずつ地図を塗り足していくつもりです。</p>
+  </div>
+</section>
+
+<section class="ports wrap">
+  <div class="section-head reveal">
+    <span class="lat">Ports of Call</span>
+    <h2>三つの寄港地</h2>
+    <p>このサイトは、航海日誌・絵図帖・船長紹介の三つの区画からなっています。</p>
+  </div>
+  <div class="route-track">
+    <a href="blog.html" class="port-card reveal">
+      <span class="port-mark"></span>
+      <span class="port-num">Port I — Log</span>
+      <h3>航海日誌</h3>
+      <p>調べたこと、読んだ資料、ふと考えたことを、日付だけを添えて綴っていく記録帖です。</p>
+      <span class="go">日誌を開く →</span>
+    </a>
+    <a href="gallery.html" class="port-card reveal">
+      <span class="port-mark"></span>
+      <span class="port-num">Port II — Chart</span>
+      <h3>絵図帖</h3>
+      <p>航路図や帆船、交易品などをモチーフにした絵や資料をまとめていく画帖です。</p>
+      <span class="go">絵図帖を開く →</span>
+    </a>
+    <a href="about.html" class="port-card reveal">
+      <span class="port-mark"></span>
+      <span class="port-num">Port III — Captain</span>
+      <h3>船長より</h3>
+      <p>このサイトを運営する「船長」について、自己紹介を兼ねてまとめたページです。</p>
+      <span class="go">紹介を読む →</span>
+    </a>
+  </div>
+</section>
+
+<div class="coord-strip">
+  <div class="wrap coord-inner">
+    <div class="coord-item"><span class="label">Course</span><span class="val">大航海時代 研究航路</span></div>
+    <div class="coord-item"><span class="label">Instrument</span><span class="val">羅針盤・アストロラーベ</span></div>
+    <div class="coord-item"><span class="label">Cargo</span><span class="val">好奇心・資料・地図</span></div>
+    <div class="coord-item"><span class="label">Log kept by</span><span class="val">Azalea72</span></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="bottle">
+        <h2>瓶に手紙を</h2>
+        <p>感想や誤りのご指摘、こんな話題も読みたいというリクエストなど、よろしければ流し瓶のようにお送りください。</p>
+        <form class="contact" action="https://formspree.io/f/maqvpvoz" method="POST">
+          <input type="text" name="name" placeholder="お名前" required>
+          <input type="email" name="email" placeholder="メールアドレス" required>
+          <textarea name="message" placeholder="メッセージ" required></textarea>
+          <button type="submit">瓶を流す</button>
+        </form>
+      </div>
+      <div class="foot-links">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="index.html">現在地 ― Home</a></li>
+          <li><a href="blog.html">航海日誌 ― Blog</a></li>
+          <li><a href="gallery.html">絵図帖 ― Gallery</a></li>
+          <li><a href="about.html">船長より ― About</a></li>
+        </ul>
+        <div class="hub-card">
+          このサイトは <a href="https://azaleacreativeroom888.github.io" target="_blank" rel="noopener">Azalea Creative Room</a> の一部です。他の制作物もあわせてどうぞ。
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Azalea72 ― 羅針と潮騒</span>
+      <span class="ai-notice">本サイトの文章・画像・デザインを、生成AIの学習データとして利用することを禁じます。</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // モバイルメニュー
+  const menuBtn = document.getElementById('menuBtn');
+  const nav = document.getElementById('mainNav');
+  if(menuBtn){
+    menuBtn.addEventListener('click', () => nav.classList.toggle('open'));
+  }
+
+  // スクロールリビール
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.15});
+    revealEls.forEach(el=>io.observe(el));
+  } else {
+    revealEls.forEach(el=>el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
