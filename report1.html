@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大航海時代に関する人物 ― 羅針と潮騒</title>
+<meta name="description" content="大航海時代にかかわった人物を、名前・没年・解説でまとめた特集ページ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&family=Zen+Old+Mincho:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2b2f;
+    --deep-sea:#0d3b4c;
+    --deep-sea-2:#0a2d3b;
+    --sea:#5fa3bd;
+    --sea-light:#a9d3de;
+    --sea-pale:#dcedf1;
+    --parchment:#f3e7c9;
+    --parchment-2:#ead6a6;
+    --parchment-line:#cdb37e;
+    --accent:#a7c23e;
+    --accent-deep:#7f9a2c;
+    --shadow:0 18px 40px -20px rgba(13,59,76,.45);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--parchment);color:var(--ink);
+    font-family:'Zen Old Mincho','Shippori Mincho',serif;
+    line-height:1.9;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.jp-serif{font-family:'Shippori Mincho',serif;}
+  .lat{font-family:'EB Garamond',serif;font-style:italic;letter-spacing:.08em;}
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  ::selection{background:var(--accent);color:var(--deep-sea-2);}
+
+  /* ---------- header / nav (共通) ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(13,59,76,.92);
+    backdrop-filter:blur(6px);
+    color:var(--parchment);
+    border-bottom:1px solid rgba(167,194,62,.35);
+  }
+  .nav-wrap{
+    max-width:1080px;margin:0 auto;padding:14px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{
+    display:flex;align-items:baseline;gap:10px;
+    font-size:1.05rem;letter-spacing:.06em;
+    text-decoration:none;color:var(--parchment);
+  }
+  .brand .lat{color:var(--accent);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;}
+  nav.route{display:flex;align-items:center;gap:0;position:relative;}
+  nav.route ul{display:flex;align-items:center;gap:0;list-style:none;margin:0;padding:0;}
+  nav.route .line{
+    position:absolute;left:14px;right:14px;top:50%;height:1px;
+    background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 12px);
+    opacity:.75;z-index:0;
+  }
+  nav.route li{position:relative;z-index:1;}
+  nav.route a{
+    display:flex;flex-direction:column;align-items:center;gap:5px;
+    padding:6px 18px;text-decoration:none;font-size:.82rem;letter-spacing:.05em;color:var(--sea-pale);
+    transition:color .2s ease;
+  }
+  nav.route a .port-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--sea-pale);border:1px solid var(--deep-sea);transition:.2s ease;
+  }
+  nav.route a:hover{color:var(--accent);}
+  nav.route a:hover .port-dot{background:var(--accent);transform:scale(1.3);}
+  nav.route a.current .port-dot{background:var(--accent);box-shadow:0 0 0 3px rgba(167,194,62,.25);}
+  nav.route a.current{color:var(--accent);}
+  .menu-btn{display:none;background:none;border:1px solid var(--sea-pale);color:var(--sea-pale);
+    padding:6px 12px;font-family:inherit;border-radius:2px;}
+
+  /* ---------- page banner ---------- */
+  .banner{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(ellipse 120% 100% at 50% -20%, rgba(167,194,62,.16), transparent 55%),
+      linear-gradient(180deg,var(--deep-sea-2) 0%, var(--deep-sea) 60%, var(--sea) 130%);
+    color:var(--parchment);
+    padding:64px 0 46px;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'EB Garamond',serif;font-style:italic;font-size:.85rem;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);}
+  .banner h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;margin:0 0 12px;letter-spacing:.04em;}
+  .banner p{max-width:60ch;color:var(--sea-pale);margin:0;font-size:.98rem;}
+  .banner-wave{position:absolute;bottom:-1px;left:0;width:100%;line-height:0;}
+  .banner-wave svg{width:100%;height:46px;display:block;}
+
+  /* ---------- 人物一覧 ---------- */
+  main{padding:60px 0 50px;}
+  .back-link{
+    display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+    color:var(--deep-sea);font-size:.88rem;letter-spacing:.06em;
+    padding:9px 18px;border:1px solid var(--parchment-line);border-radius:2px;
+    transition:.25s ease;
+  }
+  .back-link:hover{color:var(--accent-deep);border-color:var(--accent-deep);background:rgba(167,194,62,.1);}
+  .list-note{
+    display:flex;align-items:center;gap:10px;
+    font-size:.82rem;color:#6d6152;margin:30px 0 26px;
+  }
+  .list-note::before{content:"";width:18px;height:1px;background:var(--parchment-line);}
+
+  .people{
+    width:100%;border-collapse:separate;border-spacing:0;
+    background:#fbf4e0;border:1px solid var(--parchment-line);
+    box-shadow:var(--shadow);
+  }
+  .people thead th{
+    background:var(--deep-sea);color:var(--parchment);
+    font-family:'Shippori Mincho',serif;font-weight:700;font-size:.9rem;letter-spacing:.1em;
+    text-align:left;padding:14px 20px;
+    border-bottom:3px solid var(--accent);
+  }
+  .people tbody tr{transition:background .25s ease;}
+  .people tbody tr:hover{background:rgba(167,194,62,.1);}
+  .people td{
+    padding:20px;vertical-align:top;
+    border-bottom:1px dashed var(--parchment-line);
+  }
+  .people tbody tr:last-child td{border-bottom:none;}
+  .col-name{width:25%;}
+  .col-year{width:15%;}
+  .p-name{
+    display:block;font-family:'Shippori Mincho',serif;font-weight:800;
+    font-size:1.08rem;letter-spacing:.03em;line-height:1.5;
+  }
+  .p-latin{
+    display:block;font-family:'EB Garamond',serif;font-style:italic;
+    font-size:.82rem;letter-spacing:.06em;color:var(--accent-deep);margin-top:2px;
+  }
+  .p-year{
+    font-family:'EB Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--deep-sea);
+    letter-spacing:.04em;white-space:nowrap;
+  }
+  .p-year small{font-family:'Zen Old Mincho',serif;font-size:.8rem;font-weight:400;color:#6d6152;}
+  .p-desc{margin:0;font-size:.92rem;color:#3d342b;line-height:1.85;}
+
+  .end-note{text-align:center;padding:40px 0 0;color:#8a7c68;font-size:.85rem;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--deep-sea-2);color:var(--sea-pale);padding:56px 0 28px;margin-top:20px;}
+  .foot-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;
+    max-width:1080px;margin:0 auto 40px;padding:0 28px;
+  }
+  .foot-links h3{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:0 0 16px;}
+  .foot-links ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .foot-links a{text-decoration:none;color:var(--sea-pale);font-size:.92rem;border-bottom:1px solid transparent;}
+  .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
+  .hub-card{padding:16px 18px;border:1px solid rgba(167,194,62,.3);border-radius:2px;font-size:.85rem;align-self:start;}
+  .hub-card a{color:var(--accent);text-decoration:none;}
+  .hub-card a:hover{text-decoration:underline;}
+  .foot-bottom{
+    max-width:1080px;margin:0 auto;border-top:1px solid rgba(243,231,201,.12);padding:24px 28px 0;
+    font-size:.76rem;color:rgba(220,237,241,.6);line-height:1.9;
+  }
+  .foot-bottom p{margin:0 0 8px;}
+
+  @media (max-width:860px){
+    .foot-grid{grid-template-columns:1fr;gap:32px;}
+    nav.route{display:none;}
+    nav.route.open{display:flex;position:absolute;top:100%;left:0;right:0;
+      background:var(--deep-sea-2);flex-direction:column;padding:10px 28px 20px;}
+    nav.route.open ul{flex-direction:column;align-items:flex-start;gap:6px;}
+    nav.route .line{display:none;}
+    .menu-btn{display:inline-block;}
+  }
+
+  /* スマホでは表をカード表示に切り替える */
+  @media (max-width:680px){
+    .people,.people tbody,.people tr,.people td{display:block;width:100%;}
+    .people thead{display:none;}
+    .people{background:none;border:none;box-shadow:none;}
+    .people tbody tr{
+      background:#fbf4e0;border:1px solid var(--parchment-line);
+      box-shadow:var(--shadow);margin-bottom:18px;padding:6px 0;
+    }
+    .people td{border-bottom:none;padding:8px 18px;}
+    .col-name,.col-year{width:100%;}
+    .people td[data-label]::before{
+      content:attr(data-label);display:block;
+      font-family:'EB Garamond',serif;font-style:italic;font-size:.72rem;
+      letter-spacing:.2em;text-transform:uppercase;color:var(--accent-deep);margin-bottom:2px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="brand">羅針と潮騒<span class="lat">Age of Discovery Log</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="メニューを開く">☰ menu</button>
+    <nav class="route" id="mainNav">
+      <div class="line"></div>
+      <ul>
+        <li><a href="index.html"><span class="port-dot"></span>現在地</a></li>
+        <li><a href="blog.html"><span class="port-dot"></span>航海日誌</a></li>
+        <li><a href="gallery.html" class="current"><span class="port-dot"></span>絵図帖</a></li>
+        <li><a href="about.html"><span class="port-dot"></span>船長より</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="banner">
+  <div class="wrap">
+    <span class="eyebrow">Special Feature — Persons</span>
+    <h1>大航海時代に関する人物</h1>
+    <p>大航海時代にかかわった航海者・探検家・君主・宣教師たちを、名前・没年・解説でまとめました。没年の早い順に並べています。</p>
+  </div>
+  <div class="banner-wave">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,26 C150,4 300,46 450,28 C600,10 750,48 900,30 C1020,16 1120,34 1200,24 L1200,60 L0,60 Z" fill="#f3e7c9"/>
+    </svg>
+  </div>
+</div>
+
+<main class="wrap">
+  <a class="back-link" href="gallery.html">← 絵図帖に戻る</a>
+  <p class="list-note">没年の「頃」は、資料によって年に幅がある人物です</p>
+
+  <table class="people">
+    <thead>
+      <tr>
+        <th class="col-name">① 名前</th>
+        <th class="col-year">② 没年</th>
+        <th>③ 解説</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">鄭和（ていわ）</span><span class="p-latin">Zheng He</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1433<small>年頃</small></span></td>
+        <td data-label="解説"><p class="p-desc">明の時代に、大艦隊を率いて東南アジアからインド洋、アフリカ東岸まで遠征した武将です。ヨーロッパ勢が外洋へ出る数十年前の航海で、大航海時代を語るときの比較対象としてよく挙げられます。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">エンリケ航海王子</span><span class="p-latin">Henry the Navigator</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1460<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">ポルトガル王の王子で、アフリカ西岸の探検を後押ししました。自分では遠くまで航海しませんでしたが、船乗りへの支援を続けたことが、のちのインド航路の開拓につながったとされています。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">ジョアン2世</span><span class="p-latin">João II of Portugal</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1495<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">ポルトガルの王で、アフリカ南端を回ってインドへ向かう航路の探索を進めました。スペインとの間でトルデシリャス条約が結ばれたのも、この王の時代です。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">ジョン・カボット</span><span class="p-latin">John Cabot / Giovanni Caboto</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1498<small>年頃</small></span></td>
+        <td data-label="解説"><p class="p-desc">イタリア出身で、イングランド王の支援を受けて北アメリカ沿岸に到達した航海者です。翌年の再航海に出たあと消息を絶ちました。のちのイングランドの北米進出の足がかりとされています。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">バルトロメウ・ディアス</span><span class="p-latin">Bartolomeu Dias</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1500<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">ヨーロッパ人として初めてアフリカ南端の喜望峰付近を通過し、インド洋への道があることを示しました。のちにカブラルの艦隊に加わり、航海中の嵐で命を落としています。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">イサベル1世</span><span class="p-latin">Isabella I of Castile</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1504<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">カスティーリャの女王で、コロンブスの西回り航海を支援したことで知られます。夫のフェルナンド王とともに、スペインが海外へ進出する土台をつくりました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">クリストファー・コロンブス</span><span class="p-latin">Christopher Columbus</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1506<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">西へ向かえばアジアに着くと考え、1492年にカリブ海の島々へ到達したジェノヴァ出身の航海者です。ヨーロッパとアメリカ大陸の恒常的な接触のきっかけをつくった一方、その後の植民地支配をめぐって評価が分かれる人物でもあります。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">アメリゴ・ヴェスプッチ</span><span class="p-latin">Amerigo Vespucci</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1512<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">フィレンツェ出身の航海者で、南アメリカ沿岸を探検し、そこがアジアではない新しい大陸だと主張しました。「アメリカ」という地名は、彼の名前に由来するとされています。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">アフォンソ・デ・アルブケルケ</span><span class="p-latin">Afonso de Albuquerque</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1515<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">ポルトガルのインド総督として、ゴアやマラッカを攻略し、インド洋の要所に拠点を築きました。ポルトガルの海上帝国の基礎をつくった人物とされます。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">バスコ・ヌーニェス・デ・バルボア</span><span class="p-latin">Vasco Núñez de Balboa</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1519<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">パナマ地峡を横断し、ヨーロッパ人として初めて太平洋を目にしたスペインの探検家です。のちに政治的な対立から処刑されました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">ペドロ・アルヴァレス・カブラル</span><span class="p-latin">Pedro Álvares Cabral</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1520<small>年頃</small></span></td>
+        <td data-label="解説"><p class="p-desc">インドへ向かう途中で大西洋を大きく西へ進み、1500年にブラジルに到達したポルトガルの航海者です。ブラジルがポルトガル領となるきっかけになりました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">フェルディナンド・マゼラン</span><span class="p-latin">Ferdinand Magellan / Fernão de Magalhães</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1521<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">スペインの支援で世界一周を目指す艦隊を率い、南米の海峡を抜けて太平洋を渡った航海者です。フィリピンで現地の人々との戦いの中で亡くなり、一周を成し遂げたのは残された艦隊でした。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">フアン・ポンセ・デ・レオン</span><span class="p-latin">Juan Ponce de León</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1521<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">プエルトリコの初代総督を務め、1513年にフロリダ半島に上陸したスペインの探検家です。フロリダの入植を試みた際に受けた傷がもとで亡くなりました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">ヴァスコ・ダ・ガマ</span><span class="p-latin">Vasco da Gama</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1524<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">喜望峰を回ってインドのカリカットに到達し、ヨーロッパとインドを海でつなぐ航路を開いたポルトガルの航海者です。この航路によって香辛料貿易の流れが大きく変わりました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">フアン・セバスティアン・エルカーノ</span><span class="p-latin">Juan Sebastián Elcano</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1526<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">マゼランの死後に艦隊の指揮を引き継ぎ、1522年にスペインへ帰り着いて世界一周を完成させた船乗りです。のちの航海の途中、太平洋上で亡くなりました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">フランシスコ・ピサロ</span><span class="p-latin">Francisco Pizarro</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1541<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">少人数の部隊でインカ帝国を征服したスペインの軍人です。リマの町を建設しましたが、征服者どうしの争いのなかで暗殺されました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">エルナン・コルテス</span><span class="p-latin">Hernán Cortés</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1547<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">1521年にアステカ王国を滅ぼしたスペインの征服者です。その跡地に築かれた新しい支配体制は、のちのメキシコの始まりとなりました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">フランシスコ・ザビエル</span><span class="p-latin">Francis Xavier</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1552<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">イエズス会の創設に加わった宣教師で、ポルトガルの航路に乗ってインドや東南アジアで布教しました。1549年に鹿児島へ来てキリスト教を伝え、日本と大航海時代をつなぐ人物として知られます。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">ジャック・カルティエ</span><span class="p-latin">Jacques Cartier</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1557<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">フランスの航海者で、セントローレンス川をさかのぼって現在のカナダの地を探検しました。のちのフランスによるカナダ進出の足がかりをつくった人物です。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">フランシス・ドレーク</span><span class="p-latin">Francis Drake</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1596<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">イングランド人として初めて世界一周を成し遂げた航海者で、スペイン船を襲う私掠船の船長でもありました。1588年のアルマダの海戦ではイングランド艦隊の指揮官の一人を務めました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">ウィレム・バレンツ</span><span class="p-latin">Willem Barentsz</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1597<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">オランダの航海者で、北極海を通ってアジアへ向かう北回り航路を探しました。三度目の航海で厳しい冬を越した帰路に亡くなり、彼の名はバレンツ海に残っています。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">ヘンリー・ハドソン</span><span class="p-latin">Henry Hudson</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1611<small>年頃</small></span></td>
+        <td data-label="解説"><p class="p-desc">イングランド出身で、北西航路を探してハドソン川やハドソン湾を探検しました。最後の航海では越冬中に乗組員の反乱が起こり、小舟に乗せられて置き去りにされたまま消息を絶ちました。</p></td>
+      </tr>
+
+      <tr>
+        <td class="col-name" data-label="名前"><span class="p-name">ウィリアム・アダムス（三浦按針）</span><span class="p-latin">William Adams</span></td>
+        <td class="col-year" data-label="没年"><span class="p-year">1620<small>年</small></span></td>
+        <td data-label="解説"><p class="p-desc">1600年にオランダ船リーフデ号で日本に漂着したイングランド人の航海士です。徳川家康に仕えて外交や造船の相談役を務め、「三浦按針」の名を与えられました。</p></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <p class="end-note">― 人物一覧はここまで ―</p>
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-links">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html">現在地 ― Home</a></li>
+        <li><a href="blog.html">航海日誌 ― Blog</a></li>
+        <li><a href="gallery.html">絵図帖 ― Gallery</a></li>
+        <li><a href="about.html">船長より ― About</a></li>
+      </ul>
+    </div>
+    <div class="hub-card">
+      このサイトは <a href="https://azaleacreativeroom888.github.io" target="_blank" rel="noopener">Azalea Creative Room</a> の一部です。他の制作物もあわせてどうぞ。
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>当サイトに掲載されている画像・文章・作品について、AI学習への利用、トレース（トレパク）、無断転載・転載、二次利用を禁止します。スクリーンショットの転載・無断引用はご遠慮ください。</p>
+    <p>Please refrain from using any images, text, or works on this website for AI training, tracing, unauthorized reproduction, redistribution, or secondary use.</p>
+    <p>© 2026 Azalea72 ― 羅針と潮騒</p>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const nav = document.getElementById('mainNav');
+  if(menuBtn){ menuBtn.addEventListener('click', () => nav.classList.toggle('open')); }
+</script>
+
+</body>
+</html>
